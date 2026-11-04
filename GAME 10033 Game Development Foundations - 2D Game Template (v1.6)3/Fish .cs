@@ -28,10 +28,10 @@ namespace GAME_10033_Game_Development_Foundations___2D_Game_Template__v1._6_3
         { 
 
             fishColor = MohawkGame2D.Random.Color();
-            speed = MohawkGame2D.Random.Float(150, 200);
+            speed = MohawkGame2D.Random.Float(500, 700);
 
-            x = MohawkGame2D.Random.Float(50, 500);
-            y = MohawkGame2D.Random.Float(50, 500);
+            x = MohawkGame2D.Random.Float(400, 500);
+            y = MohawkGame2D.Random.Float(400, 500);
 
 
 
@@ -40,26 +40,62 @@ namespace GAME_10033_Game_Development_Foundations___2D_Game_Template__v1._6_3
 
         public void update()
         {
-            //movement code
-            x += speed * Time.DeltaTime;
 
-            //if my fish move past edge of screen snap back 
+            {
+
+        {
+            // Get keyboard input
+            char key = Input.GetCharsPressed();
+
+            // W - Move Up
+            if (key == 'w' || key == 'W')
+            {
+                y -= speed * Time.DeltaTime;
+            }
+
+            // A - Move Left
+            if (key == 'a' || key == 'A')
+            {
+                x -= speed * Time.DeltaTime;
+            }
+
+            // D - Move Right
+            if (key == 'd' || key == 'D')
+            {
+                x += speed * Time.DeltaTime;
+            }
+
+            // Snap back when fish reaches right edge
             if (x > 650)
             {
                 x = -50;
-
-                // spawn a new fish
-                speed = MohawkGame2D.Random.Float(500, 600);
                 fishColor = MohawkGame2D.Random.Color();
+                speed = MohawkGame2D.Random.Float(400, 500);
                 y = MohawkGame2D.Random.Float(50, 500);
-
-            }
-            {    // render pass 
-                DrawFish();
-
             }
 
+            // Snap back when fish reaches left edge
+            if (x < -85)
+            {
+                x = 650;
+                fishColor = MohawkGame2D.Random.Color();
+                speed = MohawkGame2D.Random.Float(400, 500);
+                y = MohawkGame2D.Random.Float(50, 500);
+            }
+
+            // Draw Fish
+            DrawFish();
         }
+
+    }
+
+
+
+}
+
+            
+
+        
         void DrawFish()
             {
                 int height = 30;
